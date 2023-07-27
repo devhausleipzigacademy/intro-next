@@ -1,5 +1,6 @@
 import { Todo as TodoType } from "@prisma/client"
 import { revalidatePath } from "next/cache"
+import prisma from "@/utils/db"
 
 type Props = {
   todo: TodoType
