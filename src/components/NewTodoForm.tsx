@@ -1,5 +1,17 @@
-"use client"
-import { createTodo } from "@/utils/actions/todos"
+import prisma from "@/utils/db"
+import { revalidatePath } from "next/cache"
+
+export async function createTodo(formData: FormData) {
+  "use server"
+  const title = formData.get("title") as string
+  const newTodo = await prisma.todo.create({
+    data: {
+      title,
+    },
+  })
+  console.log(newTodo)
+  revalidatePath("/")
+}
 
 export function NewTodoForm() {
   // const [title, setTitle] = useState("")
