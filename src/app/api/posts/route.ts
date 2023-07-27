@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server"
+import prisma from "@/utils/db"
 
 export async function GET(req: Request) {
-  console.log(req)
-  return NextResponse.json({ message: "Hello" })
+  const users = await prisma.user.findMany()
+  return NextResponse.json({ users })
 }
 
 export async function POST(req: Request) {
